@@ -33,7 +33,7 @@ Create json file with chain 1 configurations.
   "trusting-period": "48h",
   "key": "wallet_name"
 }
-rly chains add -f  kichain-t-4.json
+  rly chains add -f  kichain-t-4.json
 
 Chain -2 
 Create json file with chain21 configurations.
@@ -48,62 +48,62 @@ Create json file with chain21 configurations.
   "trusting-period": "336h",
   "key": "testkey"
 }
-rly chains add -f  autonomy.json
+  rly chains add -f  autonomy.json
 
 
 Check chains status
-rly chains list
+  rly chains list
 
 
 Adding keys
 Note: you can use same mnemonic phrase used in Ki chain, for both Ki chain and autonomy chain.
 
 Adding ki test net keys to relayer
-rly keys restore kichain-t-4  testkey "mnemonic phrase"
+  rly keys restore kichain-t-4  testkey "mnemonic phrase"
 
 Adding autonomy keys to relayer
 you can use ki seed to recover autonomy key through relayer.
-rly keys restore autonomy  testkey "mnemonic phrase"
+  rly keys restore autonomy  testkey "mnemonic phrase"
 
 Query balance
 To verify configuration properly you can use account query in both chains
-rly q bal kichain-t-4  testkey
+  rly q bal kichain-t-4  testkey
 
 You can get the test tokens for autonomy
 
-curl --header "Content-Type: application/json"   --request POST   --data '{"denom":"aut","address":"autonomy1jlqavmq6lrz2s7rrpjh0epepdzgak384zzf5xj"}'   http://20.42.119.7:8000/credit
+  curl --header "Content-Type: application/json"   --request POST   --data '{"denom":"aut","address":"autonomy1jlqavmq6lrz2s7rrpjh0epepdzgak384zzf5xj"}'   http://20.42.119.7:8000/credit
 
-rly q bal autonomy  testkey
+  rly q bal autonomy  testkey
 
 Init lightclients
 
-rly light init kichain-t-4 -f
-rly light init autonomy -f
+  rly light init kichain-t-4 -f
+  rly light init autonomy -f
 
 Now check the chain status
 
-rly chains list     
+  rly chains list     
 Path generation
 
-rly paths gen kichain-t-4 autonomy <path>
+  rly paths gen kichain-t-4 autonomy <path>
 Link the both chains
 
-rly tx link <path> -d
+  rly tx link <path> -d
 
 Note: This will create client, connection, channels between two chains.
 
 Start Relayer
 
-rly start <path>
+  rly start <path>
 IBC Transactions:
 
 from kichain to autonomy
 
-rly tx  xfer kichain-t-4 autonomy 1utki <reciver-autonomy-address> --path kitoatn -d
+  rly tx  xfer kichain-t-4 autonomy 1utki <reciver-autonomy-address> --path kitoatn -d
 
 from autonomy to kichains
 
-rly tx xfer autonomy kichain-t-4  1aut tki1ghzd9t0zj23ssew7zv8sg97l9xakh8r8nxmr4l  --path kitoatn -d
+  rly tx xfer autonomy kichain-t-4  1aut tki1ghzd9t0zj23ssew7zv8sg97l9xakh8r8nxmr4l  --path kitoatn -d
  
 
 
